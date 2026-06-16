@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const projectUrl = `/projects/${project.slug}`;
+---
+
+<article class="project-card">
+  <div class="meta">
+    <time datetime={project.data.date.toISOString()}>
+      {project.data.date.toLocaleDateString("en", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      })}
+    </time>
+  </div>
+  <h3><a href={projectUrl}>{project.data.title}</a></h3>
+  <p>{project.data.summary}</p>
+  <div class="tag-list" aria-label="Project tags">
+    {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+  <footer>
+    <a href={projectUrl}>Read project details</a>
+  </footer>
+</article>

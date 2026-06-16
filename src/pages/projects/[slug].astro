@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={`${project.data.title} | Projects`}>
+  <header class="container page-header">
+    <p class="eyebrow">Project</p>
+    <h1>{project.data.title}</h1>
+    <p>{project.data.summary}</p>
+    <div class="tag-list" aria-label="Project tags">
+      {project.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+    </div>
+  </header>
+
+  <div class="info-band">
+    <div class="container content-layout">
+      <div>
+        <strong>Role:</strong> {project.data.role}
+      </div>
+      <div>
+        <strong>Tools:</strong> {project.data.tools.join(", ")}
+      </div>
+    </div>
+  </div>
+
+  <div class="container content-layout">
+    <article class="prose">
+      <Content />
+    </article>
+    <aside class="side-panel" aria-label="Project metadata">
+      <h2>Project Info</h2>
+      <ul>
+        <li>
+          <strong>Date</strong><br />
+          <time datetime={project.data.date.toISOString()}>
+            {project.data.date.toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })}
+          </time>
+        </li>
+        <li>
+          <strong>Role</strong><br />
+          {project.data.role}
+        </li>
+        <li>
+          <strong>Tools</strong><br />
+          {project.data.tools.join(", ")}
+        </li>
+        {
+          project.data.repoUrl && (
+            <li>
+              <a href={project.data.repoUrl}>Repository</a>
+            </li>
+          )
+        }
+        {
+          project.data.demoUrl && (
+            <li>
+              <a href={project.data.demoUrl}>Demo</a>
+            </li>
+          )
+        }
+      </ul>
+    </aside>
+  </div>
+</BaseLayout>

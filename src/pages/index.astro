@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { sortProjectsByDate } from "../utils/projects";
+
+const allProjects = sortProjectsByDate(await getCollection("projects"));
+const featuredProjects = allProjects.filter((project) => project.data.featured).slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="container hero">
+    <div>
+      <p class="eyebrow">Academic portfolio</p>
+      <h1>Mathematics with computational edges.</h1>
+      <p class="hero-copy">
+        I am an undergraduate mathematics student exploring mathematical modeling,
+        applied mathematics, statistics, computational imaging, data analysis, and
+        small computer science projects.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="/projects">View Projects</a>
+        <a class="button secondary" href="/cv">Read CV</a>
+      </div>
+    </div>
+    <aside class="hero-panel" aria-label="Research interests">
+      <dl>
+        <div>
+          <dt>Current Focus</dt>
+          <dd>Inverse problems, denoising, and mathematical modeling practice.</dd>
+        </div>
+        <div>
+          <dt>Methods</dt>
+          <dd>Optimization, probability, numerical experiments, and data storytelling.</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Python, NumPy, MATLAB, LaTeX, Astro, and Git.</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="container section-heading">
+      <div>
+        <p class="eyebrow">Featured work</p>
+        <h2>Selected Projects</h2>
+      </div>
+      <p>
+        Short writeups that connect problem context, mathematical method,
+        implementation choices, and next steps.
+      </p>
+    </div>
+    <div class="container grid project-grid">
+      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>
