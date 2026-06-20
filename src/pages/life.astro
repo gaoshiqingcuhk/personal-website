@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+  ["Music / 音乐", "听见节奏、结构和情绪，也给高强度学习留一点空白。"],
+  ["Design / 设计", "关注信息怎样被看见：排版、颜色、标识，以及一个页面是否真的好读。"],
+  ["Language / 语言", "在中文和英文之间寻找自然、准确又不过度修饰的表达。"],
+  ["Clubs / 社团", "期待把兴趣放进合作和真实活动中，而不只是留在个人文件夹里。"],
+  ["Games / 游戏", "喜欢规则、反馈和选择共同构成的体验，也会留意它们背后的系统设计。"],
+  ["Small things / 小东西", "随手记下值得保留的灵感、工具和让日常变得更有趣的小发现。"]
+];
+---
+
+<BaseLayout
+  title="Life | Shiqing Gao"
+  description="A public-safe collection of Shiqing Gao's interests in music, design, language, clubs, games, and creative expression."
+>
+  <header class="container page-header personal-header">
+    <p class="eyebrow">Life / 兴趣</p>
+    <h1>课程和项目之外，也有一些让我保持好奇的东西。</h1>
+    <p>这里放一些不完全属于课程和项目的方向：音乐、设计、语言、社团、游戏，以及一些我觉得有趣的表达。它不是私人日记，只是一张轻量的兴趣地图。</p>
+  </header>
+
+  <section class="container life-grid section">
+    {sections.map(([title, copy], index) => (
+      <article class="life-item">
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <h2>{title}</h2>
+        <p>{copy}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

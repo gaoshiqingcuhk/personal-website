@@ -4,78 +4,47 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project }
-  }));
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const links = [
+  project.data.repoUrl && { label: "Repository", href: project.data.repoUrl },
+  project.data.demoUrl && { label: "Live site", href: project.data.demoUrl },
+  project.data.reportUrl && { label: "Report", href: project.data.reportUrl }
+].filter(Boolean);
 ---
 
-<BaseLayout title={`${project.data.title} | Projects`}>
-  <header class="container page-header">
-    <p class="eyebrow">Project</p>
-    <h1>{project.data.title}</h1>
-    <p>{project.data.summary}</p>
-    <div class="tag-list" aria-label="Project tags">
-      {project.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+<BaseLayout title={`${project.data.title} | Shiqing Gao`} description={project.data.summary}>
+  <header class="container project-header">
+    <a class="back-link" href="/projects">← All projects / 返回项目</a>
+    <div class="project-header-grid">
+      <div>
+        <p class="eyebrow">{project.data.category}</p>
+        <h1>{project.data.title}</h1>
+        {project.data.titleZh && <p class="project-heading-zh">{project.data.titleZh}</p>}
+        <p class="project-summary">{project.data.summary}</p>
+      </div>
+      <dl class="project-facts">
+        <div><dt>Status</dt><dd>{project.data.status}</dd></div>
+        <div><dt>Role</dt><dd>{project.data.role}</dd></div>
+        <div><dt>Tools</dt><dd>{project.data.tools.join(", ")}</dd></div>
+      </dl>
     </div>
   </header>
 
-  <div class="info-band">
-    <div class="container content-layout">
-      <div>
-        <strong>Role:</strong> {project.data.role}
+  <div class="container project-body-grid">
+    <article class="prose project-prose"><Content /></article>
+    <aside class="project-aside">
+      <div class="tag-list" aria-label="Project tags">
+        {project.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
       </div>
-      <div>
-        <strong>Tools:</strong> {project.data.tools.join(", ")}
-      </div>
-    </div>
-  </div>
-
-  <div class="container content-layout">
-    <article class="prose">
-      <Content />
-    </article>
-    <aside class="side-panel" aria-label="Project metadata">
-      <h2>Project Info</h2>
-      <ul>
-        <li>
-          <strong>Date</strong><br />
-          <time datetime={project.data.date.toISOString()}>
-            {project.data.date.toLocaleDateString("en", {
-              year: "numeric",
-              month: "long",
-              day: "numeric"
-            })}
-          </time>
-        </li>
-        <li>
-          <strong>Role</strong><br />
-          {project.data.role}
-        </li>
-        <li>
-          <strong>Tools</strong><br />
-          {project.data.tools.join(", ")}
-        </li>
-        {
-          project.data.repoUrl && (
-            <li>
-              <a href={project.data.repoUrl}>Repository</a>
-            </li>
-          )
-        }
-        {
-          project.data.demoUrl && (
-            <li>
-              <a href={project.data.demoUrl}>Demo</a>
-            </li>
-          )
-        }
-      </ul>
+      {links.length > 0 && (
+        <div class="project-links">
+          {links.map((link: any) => <a href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>)}
+        </div>
+      )}
     </aside>
   </div>
 </BaseLayout>

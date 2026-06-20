@@ -3,15 +3,14 @@ export type EducationItem = {
   degree: string;
   standing: string;
   gpa?: string;
-  showGpa?: boolean;
+  showGpa: boolean;
 };
 
 export type CvProject = {
   name: string;
   bullets: string[];
   tools: string[];
-  note?: string;
-  repoUrl?: string;
+  url?: string;
 };
 
 export type SkillGroup = {
@@ -19,40 +18,20 @@ export type SkillGroup = {
   items: string[];
 };
 
-export type CvData = {
-  name: string;
-  title: string;
-  location: string;
-  email: string;
-  website: string;
-  github: string;
-  linkedin: string;
-  education: EducationItem[];
-  interests: string[];
-  projects: CvProject[];
-  skills: SkillGroup[];
-  coursework: string[];
-  awardsActivities: string[];
-};
-
-export const cv: CvData = {
+export const cv = {
   name: "Shiqing Gao",
   title: "Mathematics Undergraduate",
   location: "Hong Kong",
-  email: "TODO: add email",
-  website: "TODO: add personal website",
-  github: "TODO: add GitHub profile",
-  linkedin: "TODO: add LinkedIn profile",
+  website: "https://www.gaoshiqing.space/",
   education: [
     {
       institution: "The Chinese University of Hong Kong",
       degree: "B.Sc. in Mathematics",
       standing: "Sophomore",
       gpa: "3.4/4.0",
-      // Set this to false if you prefer to hide GPA from the public CV.
       showGpa: true
     }
-  ],
+  ] satisfies EducationItem[],
   interests: [
     "Applied Mathematics",
     "Computational Imaging",
@@ -66,61 +45,49 @@ export const cv: CvData = {
     {
       name: "Image Inverse Problems / Denoising MVP",
       bullets: [
-        "Built a small experimental pipeline for image denoising.",
-        "Compared noisy images and Gaussian-filtered outputs.",
-        "Evaluated performance using PSNR and SSIM.",
-        "Conducted noise sensitivity and filter sigma sensitivity analysis."
+        "Built a small experimental pipeline for image denoising as an entry point to inverse problems.",
+        "Compared Gaussian filtering, Tikhonov regularization, and total variation denoising.",
+        "Evaluated reconstruction quality using PSNR and SSIM.",
+        "Conducted parameter sensitivity analysis and multi-image testing."
       ],
-      tools: ["Python", "NumPy", "scikit-image", "pandas", "matplotlib"],
-      note: "TODO: link to GitHub repo"
+      tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image"],
+      url: "/projects/image-inverse-problems-denoising"
     },
     {
-      name: "Mathematical Modeling Competition Practice",
+      name: "Mathematical Modeling Practice",
       bullets: [
         "Practiced problem formulation, assumption design, model construction, and result interpretation.",
-        "Focused on translating open-ended problems into quantitative models."
+        "Focused on translating open-ended questions into quantitative models and structured reports."
       ],
-      tools: ["Python", "LaTeX", "mathematical modeling"],
-      note: "TODO: add competition/report details"
+      tools: ["Python", "LaTeX", "Mathematical Modeling"],
+      url: "/projects/modeling-competition-practice"
     },
     {
-      name: "Statistical Data Analysis Mini Project",
+      name: "Personal Website",
       bullets: [
-        "Performed descriptive statistics, visualization, and interpretation on structured datasets.",
-        "Practiced statistical reasoning and communication."
+        "Built a bilingual personal website for projects, writing, CV, and personal exploration.",
+        "Developed as a static site with reusable content structures and a print-ready CV."
       ],
-      tools: ["Python", "pandas", "matplotlib", "statistics"],
-      note: "TODO: replace with a concrete dataset/project later"
+      tools: ["Astro", "TypeScript", "HTML", "CSS"],
+      url: "/projects/personal-website"
     }
-  ],
+  ] satisfies CvProject[],
   skills: [
-    {
-      category: "Programming",
-      items: ["Python", "C++", "TypeScript basics"]
-    },
+    { category: "Programming", items: ["Python", "C++", "TypeScript basics"] },
     {
       category: "Data / Scientific Computing",
       items: ["NumPy", "pandas", "matplotlib", "scikit-image"]
     },
-    {
-      category: "Web",
-      items: ["Astro", "HTML", "CSS", "GitHub Pages or Vercel"]
-    },
-    {
-      category: "Writing / Tools",
-      items: ["LaTeX", "Markdown", "Git"]
-    }
-  ],
+    { category: "Web", items: ["Astro", "HTML", "CSS", "Vercel"] },
+    { category: "Writing / Tools", items: ["LaTeX", "Markdown", "Git"] }
+  ] satisfies SkillGroup[],
   coursework: [
     "Calculus",
     "Linear Algebra",
     "Probability",
     "Statistics",
     "Vector Calculus",
-    "Mathematical Modeling",
-    "TODO: add more exact course names later"
+    "Mathematical Modeling"
   ],
-  awardsActivities: [
-    "TODO: Add mathematical modeling competitions, student clubs, or academic activities later."
-  ]
+  awardsActivities: [] as string[]
 };

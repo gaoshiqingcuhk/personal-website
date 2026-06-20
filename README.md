@@ -1,41 +1,33 @@
-# Academic Portfolio
+# Shiqing Gao Personal Website
 
-A clean Astro + TypeScript personal academic website for projects, notes, CV, and contact information.
+A bilingual Astro + TypeScript personal website for projects, writing, CV, and small explorations.
 
-## Local Development
+## Local development
 
-```bash
-npm install
-npm run dev
+```powershell
+npm.cmd install
+npm.cmd run dev
 ```
+
+Open `http://localhost:4321`.
 
 ## Build
 
-```bash
-npm run build
-npm run preview
+```powershell
+npm.cmd run build
+npm.cmd run preview
 ```
 
-## Add a Project
+## CV PDF
 
-Create a Markdown file in `src/content/projects/` with frontmatter matching the existing examples:
+With the dev server running at `http://localhost:4321`:
 
-```md
----
-title: "New Project Title"
-date: "2026-06-16"
-tags: ["Applied Math", "Data Analysis"]
-summary: "A short project description."
-role: "Student researcher"
-tools: ["Python", "NumPy"]
-repoUrl: "https://github.com/yourname/repo"
-demoUrl: ""
-featured: false
----
-
-## Background
-
-Write the project story here.
+```powershell
+npm.cmd run generate:cv
 ```
 
-The project will automatically appear on `/projects`, and its detail page will use the file name as the URL slug. For example, `new-project-title.md` becomes `/projects/new-project-title`.
+The generated file is `public/Shiqing_Gao_CV.pdf`.
+
+## Editing content
+
+See `docs/CONTENT_GUIDE.md` for the site data, projects, CV, writing, and deployment workflow.

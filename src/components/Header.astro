@@ -1,25 +1,21 @@
 ---
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/notes", label: "Notes" },
-  { href: "/cv", label: "CV" },
-  { href: "/contact", label: "Contact" }
-];
+import { site } from "../data/site";
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <header class="site-header">
   <nav class="container nav" aria-label="Primary navigation">
-    <a class="brand" href="/">
-      <strong>Your Name</strong>
-      <span>Mathematics · Data · Imaging</span>
+    <a class="brand" href="/" aria-label="Shiqing Gao home">
+      <span class="brand-mark" aria-hidden="true">SG</span>
+      <span class="brand-copy">
+        <strong>Shiqing Gao</strong>
+        <small>Projects · Writing · Explorations</small>
+      </span>
     </a>
     <div class="nav-links">
       {
-        navItems.map((item) => {
+        site.navigation.map((item) => {
           const itemPath = item.href.replace(/\/$/, "") || "/";
           const isCurrent =
             currentPath === itemPath ||

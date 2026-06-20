@@ -2,30 +2,40 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
-import { getAllTags, sortProjectsByDate } from "../../utils/projects";
+import { sortProjectsByDate } from "../../utils/projects";
 
 const projects = sortProjectsByDate(await getCollection("projects"));
-const tags = getAllTags(projects);
+const categories = ["Academic / Technical", "Meta", "Creative / Personal"] as const;
 ---
 
-<BaseLayout title="Projects | Your Name">
-  <header class="container page-header">
-    <p class="eyebrow">Projects</p>
-    <h1>Project archive</h1>
-    <p>
-      A growing collection of applied mathematics, modeling, statistics,
-      imaging, data analysis, and computing projects.
-    </p>
+<BaseLayout
+  title="Projects | Shiqing Gao"
+  description="Projects by Shiqing Gao across applied mathematics, computational imaging, data analysis, writing, design, and personal exploration."
+>
+  <header class="container page-header personal-header">
+    <p class="eyebrow">Projects / 项目</p>
+    <h1>把想法变成可以运行、解释和复盘的东西。</h1>
+    <p>这里收集我做过和正在做的一些项目：有些偏数学和计算，有些属于个人表达。它们不一定都很大，但都记录了我把想法变成具体输出的过程。</p>
   </header>
 
-  <section class="container">
-    <div class="tag-filter" aria-label="Available project tags">
-      <div class="tag-list">
-        {tags.map((tag) => <span class="tag">{tag}</span>)}
-      </div>
-    </div>
-    <div class="grid project-grid">
-      {projects.map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
+  <div class="container category-stack">
+    {
+      categories.map((category) => {
+        const items = projects.filter((project) => project.data.category === category);
+        if (items.length === 0) return null;
+
+        return (
+          <section class="project-category">
+            <div class="category-heading">
+              <h2>{category}</h2>
+              <span>{items.length.toString().padStart(2, "0")}</span>
+            </div>
+            <div class="grid project-grid">
+              {items.map((project) => <ProjectCard project={project} />)}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
 </BaseLayout>

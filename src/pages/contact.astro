@@ -1,33 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
 ---
 
-<BaseLayout title="Contact | Your Name">
-  <header class="container page-header">
-    <p class="eyebrow">Contact</p>
-    <h1>Let’s connect.</h1>
-    <p>
-      I am open to academic conversations, project collaboration, and learning
-      opportunities around mathematics, computing, and data.
-    </p>
+<BaseLayout
+  title="Contact | Shiqing Gao"
+  description="Contact and website information for Shiqing Gao."
+>
+  <header class="container page-header personal-header">
+    <p class="eyebrow">Contact / 联系</p>
+    <h1>For projects, learning, writing, or other interesting ideas.</h1>
+    <p>如果你想交流项目、学习、写作或其他有趣的想法，可以通过这里找到我。更多联系方式会在适合公开时加入。</p>
   </header>
 
-  <section class="container section">
-    <ul class="plain-list">
-      <li>
-        <strong>Email</strong><br />
-        <a href="mailto:your.email@example.com">your.email@example.com</a>
-      </li>
-      <li>
-        <strong>GitHub</strong><br />
-        <a href="https://github.com/your-username">github.com/your-username</a>
-      </li>
-      <li>
-        <strong>LinkedIn</strong><br />
-        <a href="https://www.linkedin.com/in/your-profile">
-          linkedin.com/in/your-profile
-        </a>
-      </li>
-    </ul>
+  <section class="container contact-section section">
+    <div class="contact-label">Website</div>
+    <div>
+      <a class="contact-link" href={profile.website}>www.gaoshiqing.space <span aria-hidden="true">↗</span></a>
+      <p>This website is currently the public point of contact.</p>
+    </div>
   </section>
 </BaseLayout>

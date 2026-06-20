@@ -1,37 +1,45 @@
 ---
 title: "Image Inverse Problems / Denoising MVP"
-date: "2026-03-12"
-tags: ["Computational Imaging", "Inverse Problems", "Optimization"]
-summary: "A small minimum viable project exploring image denoising as an inverse problem with classical regularization ideas."
-role: "Independent student project"
-tools: ["Python", "NumPy", "Matplotlib", "scikit-image"]
-repoUrl: "https://github.com/your-username/image-denoising-mvp"
-demoUrl: ""
+titleZh: "图像反问题实验项目"
+status: "Ongoing exploration"
+category: "Academic / Technical"
+tags: ["Computational Imaging", "Inverse Problems", "Scientific Computing"]
+summary: "A small experimental pipeline for studying image denoising as an entry point to inverse problems."
+summaryZh: "从图像去噪出发，理解反问题、正则化、评价指标与参数敏感性。"
+role: "Independent project"
+tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image"]
 featured: true
 ---
 
-## Background
+## Overview / 项目概览
 
-Image denoising can be viewed as a simple inverse problem: recover a clean image from an observed image corrupted by noise. This project starts with a deliberately small scope so the mathematical assumptions are easy to inspect.
+This project uses image denoising as a concrete entry point to inverse problems. Instead of treating denoising as a single filter call, I organized it as a small experimental pipeline: create or observe degradation, choose a reconstruction method, compare outputs, measure quality, and study how parameters change the result.
 
-## Method
+这是一个以图像去噪为入口的反问题实验项目。我希望把“加噪—恢复—评价—复盘”做成一条完整、可重复的实验链路，而不只是得到一张看起来更干净的图片。
 
-The MVP compares a baseline smoothing method with a regularized reconstruction objective. The main idea is to balance fidelity to the noisy observation with a penalty that discourages unstable or overly rough reconstructions.
+## What I built / 做了什么
 
-## Results
+- A repeatable workflow for noisy and reconstructed image comparison
+- Gaussian filtering as a simple baseline
+- Tikhonov regularization and total variation denoising experiments
+- PSNR and SSIM evaluation
+- Noise-level and parameter sensitivity analysis
+- Multi-image testing and a compact written report
 
-The early experiments show the expected tradeoff: stronger regularization removes more noise but can blur edges and fine details. Visual comparisons and simple metrics help make that tradeoff concrete.
+## Methods / 方法
 
-## Technical Stack
+Gaussian filtering provides an intuitive baseline but can smooth important edges. Tikhonov regularization introduces an explicit balance between data fidelity and smoothness. Total variation denoising offers another perspective by encouraging piecewise-smooth reconstructions while preserving sharper transitions.
 
-- Python for experiment scripts
-- NumPy for array operations
-- Matplotlib for visual comparison plots
-- scikit-image for sample images and basic quality metrics
+The main emphasis is not declaring one universally best method. It is understanding what each objective assumes about an image and how those assumptions appear in the reconstructed result.
 
-## Next Steps
+## Results and reflection / 结果与复盘
 
-- Add total variation regularization
-- Compare Gaussian, salt-and-pepper, and Poisson noise
-- Write a short note explaining the optimization objective
-- Build a small interactive demo for parameter tuning
+PSNR and SSIM provide consistent quantitative reference points, while side-by-side images reveal details that a single metric cannot capture. Sensitivity experiments also make the regularization trade-off visible: parameters that suppress more noise can also remove texture or soften edges.
+
+I am keeping this page qualitative until the underlying result tables and figures are published alongside the project. No numerical claims are shown here without a verifiable source.
+
+## Next steps / 下一步
+
+- Organize the experiment code and figures into a public repository
+- Publish the mini report and reproducible parameter settings
+- Compare behavior across a wider range of image structures and noise levels

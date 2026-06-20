@@ -2,7 +2,10 @@ import type { CollectionEntry } from "astro:content";
 
 export function sortProjectsByDate(projects: CollectionEntry<"projects">[]) {
   return projects.sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime()
+    (a, b) =>
+      Number(b.data.featured) - Number(a.data.featured) ||
+      (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0) ||
+      a.data.title.localeCompare(b.data.title)
   );
 }
 

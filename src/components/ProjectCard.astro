@@ -10,21 +10,19 @@ const projectUrl = `/projects/${project.slug}`;
 ---
 
 <article class="project-card">
-  <div class="meta">
-    <time datetime={project.data.date.toISOString()}>
-      {project.data.date.toLocaleDateString("en", {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      })}
-    </time>
+  <div class="project-card-topline">
+    <span>{project.data.category}</span>
+    <span>{project.data.status}</span>
   </div>
-  <h3><a href={projectUrl}>{project.data.title}</a></h3>
+  <div>
+    <h3><a href={projectUrl}>{project.data.title}</a></h3>
+    {project.data.titleZh && <p class="project-title-zh">{project.data.titleZh}</p>}
+  </div>
   <p>{project.data.summary}</p>
   <div class="tag-list" aria-label="Project tags">
-    {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+    {project.data.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
   </div>
   <footer>
-    <a href={projectUrl}>Read project details</a>
+    <a class="text-link" href={projectUrl}>View project / 查看项目 <span aria-hidden="true">→</span></a>
   </footer>
 </article>

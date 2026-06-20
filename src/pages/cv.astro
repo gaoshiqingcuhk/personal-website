@@ -3,143 +3,83 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { cv } from "../data/cv";
 ---
 
-<BaseLayout title={`CV | ${cv.name}`} description={`${cv.name}'s academic CV and project profile.`}>
+<BaseLayout
+  title="CV | Shiqing Gao"
+  description="Academic CV of Shiqing Gao, a mathematics undergraduate at The Chinese University of Hong Kong."
+>
   <header class="cv-hero">
     <div class="cv-wrap cv-hero-grid">
       <div>
         <p class="eyebrow">Curriculum Vitae</p>
         <h1>{cv.name}</h1>
         <p class="cv-title">{cv.title}</p>
-        <p class="cv-summary">
-          Mathematics undergraduate at The Chinese University of Hong Kong, with
-          interests across applied mathematics, computational imaging, inverse
-          problems, statistical modeling, data science, scientific computing,
-          and machine learning.
-        </p>
+        <p class="cv-summary">这里是我的正式 CV，主要用于学术项目、暑研申请和项目展示。The main content remains English-first for formal use.</p>
       </div>
-      <aside class="cv-contact-card" aria-label="CV contact links">
+      <aside class="cv-contact-card" aria-label="CV links">
         <a class="button primary cv-download" href="/Shiqing_Gao_CV.pdf">Download PDF</a>
         <dl>
-          <div>
-            <dt>Location</dt>
-            <dd>{cv.location}</dd>
-          </div>
-          <div>
-            <dt>Email</dt>
-            <dd>{cv.email}</dd>
-          </div>
-          <div>
-            <dt>Website</dt>
-            <dd>{cv.website}</dd>
-          </div>
-          <div>
-            <dt>GitHub</dt>
-            <dd>{cv.github}</dd>
-          </div>
-          <div>
-            <dt>LinkedIn</dt>
-            <dd>{cv.linkedin}</dd>
-          </div>
+          <div><dt>Location</dt><dd>{cv.location}</dd></div>
+          <div><dt>Website</dt><dd><a href={cv.website}>www.gaoshiqing.space</a></dd></div>
         </dl>
       </aside>
     </div>
   </header>
 
-  <main class="cv-wrap cv-page">
+  <div class="cv-wrap cv-page">
     <section class="cv-section">
-      <div class="cv-section-heading">
-        <span>01</span>
-        <h2>Education</h2>
-      </div>
-      {
-        cv.education.map((item) => (
-          <article class="cv-entry">
-            <div>
-              <h3>{item.institution}</h3>
-              <p>{item.degree}</p>
-            </div>
-            <div class="cv-entry-meta">
-              <span>{item.standing}</span>
-              {item.showGpa && item.gpa && <span>GPA: {item.gpa}</span>}
-            </div>
-          </article>
-        ))
-      }
+      <div class="cv-section-heading"><span>01</span><h2>Education</h2></div>
+      {cv.education.map((item) => (
+        <article class="cv-entry">
+          <div><h3>{item.institution}</h3><p>{item.degree}</p></div>
+          <div class="cv-entry-meta">
+            <span>{item.standing}</span>
+            {item.showGpa && item.gpa && <span>GPA: {item.gpa}</span>}
+          </div>
+        </article>
+      ))}
     </section>
 
     <section class="cv-section">
-      <div class="cv-section-heading">
-        <span>02</span>
-        <h2>Research Interests</h2>
-      </div>
-      <div class="cv-pill-grid">
-        {cv.interests.map((interest) => <span>{interest}</span>)}
-      </div>
+      <div class="cv-section-heading"><span>02</span><h2>Research Interests</h2></div>
+      <div class="cv-pill-grid">{cv.interests.map((interest) => <span>{interest}</span>)}</div>
     </section>
 
     <section class="cv-section cv-projects-section">
-      <div class="cv-section-heading">
-        <span>03</span>
-        <h2>Projects</h2>
-      </div>
+      <div class="cv-section-heading"><span>03</span><h2>Projects</h2></div>
       <div class="cv-project-list">
-        {
-          cv.projects.map((project) => (
-            <article class="cv-project-entry">
-              <div class="cv-project-top">
-                <h3>{project.name}</h3>
-                {project.repoUrl && <a href={project.repoUrl}>Repository</a>}
-              </div>
-              <ul>
-                {project.bullets.map((bullet) => <li>{bullet}</li>)}
-              </ul>
-              <p class="cv-tools">
-                <strong>Tools:</strong> {project.tools.join(", ")}
-              </p>
-              {project.note && <p class="cv-todo">{project.note}</p>}
-            </article>
-          ))
-        }
+        {cv.projects.map((project) => (
+          <article class="cv-project-entry">
+            <div class="cv-project-top">
+              <h3>{project.name}</h3>
+              {project.url && <a href={project.url}>Project page</a>}
+            </div>
+            <ul>{project.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+            <p class="cv-tools"><strong>Tools:</strong> {project.tools.join(", ")}</p>
+          </article>
+        ))}
       </div>
     </section>
 
     <div class="cv-two-column">
       <section class="cv-section">
-        <div class="cv-section-heading">
-          <span>04</span>
-          <h2>Technical Skills</h2>
-        </div>
+        <div class="cv-section-heading"><span>04</span><h2>Technical Skills</h2></div>
         <div class="cv-skill-list">
-          {
-            cv.skills.map((group) => (
-              <article>
-                <h3>{group.category}</h3>
-                <p>{group.items.join(", ")}</p>
-              </article>
-            ))
-          }
+          {cv.skills.map((group) => (
+            <article><h3>{group.category}</h3><p>{group.items.join(", ")}</p></article>
+          ))}
         </div>
       </section>
-
       <section class="cv-section">
-        <div class="cv-section-heading">
-          <span>05</span>
-          <h2>Coursework</h2>
-        </div>
-        <ul class="cv-compact-list">
-          {cv.coursework.map((course) => <li>{course}</li>)}
-        </ul>
+        <div class="cv-section-heading"><span>05</span><h2>Coursework</h2></div>
+        <ul class="cv-compact-list">{cv.coursework.map((course) => <li>{course}</li>)}</ul>
       </section>
     </div>
 
-    <section class="cv-section">
-      <div class="cv-section-heading">
-        <span>06</span>
-        <h2>Awards / Activities</h2>
-      </div>
-      <ul class="cv-compact-list">
-        {cv.awardsActivities.map((item) => <li>{item}</li>)}
-      </ul>
-    </section>
-  </main>
+    {cv.awardsActivities.length > 0 && (
+      <section class="cv-section">
+        <div class="cv-section-heading"><span>06</span><h2>Awards / Activities</h2></div>
+        <ul class="cv-compact-list">{cv.awardsActivities.map((item) => <li>{item}</li>)}</ul>
+      </section>
+    )}
+  </div>
 </BaseLayout>
