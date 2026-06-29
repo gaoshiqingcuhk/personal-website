@@ -1,11 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import { cv } from "../data/cv";
 ---
 
 <BaseLayout
   title="CV | Shiqing Gao"
-  description="Academic CV of Shiqing Gao, a mathematics undergraduate at The Chinese University of Hong Kong."
+  description="Academic CV of Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong."
+  lang="en"
 >
   <header class="cv-hero">
     <div class="cv-wrap cv-hero-grid">
@@ -13,13 +15,30 @@ import { cv } from "../data/cv";
         <p class="eyebrow">Curriculum Vitae</p>
         <h1>{cv.name}</h1>
         <p class="cv-title">{cv.title}</p>
-        <p class="cv-summary">这里是我的正式 CV，主要用于学术项目、暑研申请和项目展示。The main content remains English-first for formal use.</p>
+        <p class="cv-summary">
+          Undergraduate mathematics student at The Chinese University of Hong Kong,
+          interested in computational inverse problems, scientific computing,
+          numerical methods, uncertainty quantification, and machine learning-related
+          inverse problems.
+        </p>
       </div>
       <aside class="cv-contact-card" aria-label="CV links">
         <a class="button primary cv-download" href="/Shiqing_Gao_CV.pdf">Download PDF</a>
         <dl>
-          <div><dt>Location</dt><dd>{cv.location}</dd></div>
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <ObfuscatedEmail
+                label={cv.emailLabel}
+                parts={cv.emailParts}
+                linkClass="cv-email-text"
+                compact
+              />
+            </dd>
+          </div>
+          <div><dt>GitHub</dt><dd><a href={cv.github}>github.com/gaoshiqingcuhk</a></dd></div>
           <div><dt>Website</dt><dd><a href={cv.website}>www.gaoshiqing.space</a></dd></div>
+          <div><dt>Location</dt><dd>{cv.location}</dd></div>
         </dl>
       </aside>
     </div>
@@ -31,10 +50,6 @@ import { cv } from "../data/cv";
       {cv.education.map((item) => (
         <article class="cv-entry">
           <div><h3>{item.institution}</h3><p>{item.degree}</p></div>
-          <div class="cv-entry-meta">
-            <span>{item.standing}</span>
-            {item.showGpa && item.gpa && <span>GPA: {item.gpa}</span>}
-          </div>
         </article>
       ))}
     </section>
@@ -45,7 +60,7 @@ import { cv } from "../data/cv";
     </section>
 
     <section class="cv-section cv-projects-section">
-      <div class="cv-section-heading"><span>03</span><h2>Projects</h2></div>
+      <div class="cv-section-heading"><span>03</span><h2>Selected Projects</h2></div>
       <div class="cv-project-list">
         {cv.projects.map((project) => (
           <article class="cv-project-entry">

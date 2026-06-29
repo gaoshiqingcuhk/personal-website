@@ -7,69 +7,73 @@ import { site } from "../data/site";
 import { sortProjectsByDate } from "../utils/projects";
 
 const allProjects = sortProjectsByDate(await getCollection("projects"));
-const featuredProjects = allProjects.filter((project) => project.data.featured).slice(0, 3);
+const featuredProjects = allProjects.filter((project) => project.data.featured).slice(0, 4);
 
 const entries = [
   {
     href: "/projects",
     number: "01",
-    title: "Projects / 项目",
-    copy: "Academic, technical, creative, and personal projects."
-  },
-  {
-    href: "/writing",
-    number: "02",
-    title: "Writing / 文字",
-    copy: "学习笔记、项目复盘和一些表达练习。"
+    title: "Projects",
+    copy: "Selected computational projects in inverse problems, UQ, and modeling."
   },
   {
     href: "/cv",
-    number: "03",
+    number: "02",
     title: "CV",
-    copy: "A formal overview of my education, projects, and skills."
+    copy: "Education, interests, projects, coursework, and technical skills."
   },
   {
-    href: "/life",
+    href: profile.github,
+    number: "03",
+    title: "GitHub",
+    copy: "Public code and small computational experiments."
+  },
+  {
+    href: "/contact",
     number: "04",
-    title: "Life / 兴趣",
-    copy: "Music, design, language, clubs, games, and small things I enjoy."
+    title: "Contact",
+    copy: "Email, GitHub, and website information."
   }
 ];
 ---
 
-<BaseLayout title={site.title} description={site.description}>
+<BaseLayout title={site.title} description={site.description} lang="en">
   <section class="container home-hero">
     <div class="home-hero-copy">
-      <p class="eyebrow">Hello / 你好</p>
-      <h1>Hi, I’m <span>Shiqing Gao.</span></h1>
-      <p class="hero-zh">数学、项目、文字和一些有趣的生活切片。</p>
+      <p class="eyebrow">Undergraduate mathematics student</p>
+      <h1>Shiqing <span>Gao.</span></h1>
+      <p class="hero-zh">
+        Undergraduate student in Mathematics, The Chinese University of Hong Kong.
+      </p>
       <p class="hero-copy">
-        I study mathematics at {profile.university}. I build small projects,
-        write about what I learn, and explore applied mathematics, computing,
-        design, and language.
+        I am interested in applied mathematics, computational inverse problems,
+        scientific computing, numerical methods, uncertainty quantification, and
+        machine learning-related inverse problems. This site collects selected
+        undergraduate computational projects and a concise academic CV.
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="/projects">View Projects / 看项目</a>
-        <a class="button secondary" href="/writing">Read Writing / 看文字</a>
-        <a class="button quiet" href="/cv">View CV</a>
+        <a class="button primary" href="/projects">View Projects</a>
+        <a class="button secondary" href="/cv">View CV</a>
+        <a class="button secondary" href={profile.github}>GitHub</a>
+        <a class="button quiet" href="/contact">Contact</a>
       </div>
     </div>
     <aside class="identity-visual" aria-label="Shiqing Gao profile summary">
       <div class="identity-mark" aria-hidden="true">SG</div>
       <div class="identity-lines" aria-hidden="true"><span></span><span></span><span></span></div>
-      <p>Mathematics undergraduate</p>
-      <strong>The Chinese University of Hong Kong</strong>
-      <small>Learning by building, testing, and writing things down.</small>
+      <p>Current focus</p>
+      <strong>Inverse problems, scientific computing, and UQ</strong>
+      <small>Learning through small reproducible numerical experiments.</small>
     </aside>
   </section>
 
-  <section class="container home-entries" aria-label="Site sections">
+  <section class="container home-entries" aria-label="Main links">
     {entries.map((entry) => (
       <a class="entry-card" href={entry.href}>
         <span class="entry-number">{entry.number}</span>
         <h2>{entry.title}</h2>
         <p>{entry.copy}</p>
-        <span class="entry-arrow" aria-hidden="true">→</span>
+        <span class="entry-arrow" aria-hidden="true">-&gt;</span>
       </a>
     ))}
   </section>
@@ -77,10 +81,13 @@ const entries = [
   <section class="section section-band">
     <div class="container section-heading">
       <div>
-        <p class="eyebrow">Selected work / 近期项目</p>
-        <h2>Projects in progress</h2>
+        <p class="eyebrow">Selected work</p>
+        <h2>Selected computational projects</h2>
       </div>
-      <p>Not everything here is finished. Each page records what I built, what I learned, and what comes next.</p>
+      <p>
+        These are modest undergraduate computational projects. Each page records
+        the problem, methods, outputs, and limitations in a concise public format.
+      </p>
     </div>
     <div class="container grid project-grid">
       {featuredProjects.map((project) => <ProjectCard project={project} />)}
@@ -89,16 +96,25 @@ const entries = [
 
   <section class="container home-writing section">
     <div>
-      <p class="eyebrow">Writing / 文字</p>
-      <h2>Notes before they become conclusions.</h2>
+      <p class="eyebrow">Notes and personal space</p>
+      <h2>Secondary pages, kept intentionally low-key.</h2>
     </div>
     <div>
-      <p>这里会慢慢放进学习记录、项目复盘和表达练习。相比“成品展示”，我更想记录自己如何理解一个问题，以及想法是怎样变得清楚的。</p>
-      <a class="text-link" href="/writing">Visit Writing / 去看文字 <span aria-hidden="true">→</span></a>
+      <p>
+        I keep a small writing area and a life/interests page for learning notes
+        and personal context. They stay secondary to the project pages, but help
+        keep the site personal and maintained.
+      </p>
+      <a class="text-link" href="/writing">Visit writing <span aria-hidden="true">-&gt;</span></a>
+      <span class="secondary-separator" aria-hidden="true">/</span>
+      <a class="text-link" href="/life">Visit life page <span aria-hidden="true">-&gt;</span></a>
     </div>
   </section>
 
   <section class="container home-closing">
-    <p>这个网站会和我一起慢慢长大。It is a record of learning in public, one small project at a time.</p>
+    <p>
+      The site is a concise record of what I am currently learning by building,
+      testing, and writing down small computational projects.
+    </p>
   </section>
 </BaseLayout>

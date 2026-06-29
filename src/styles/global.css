@@ -295,9 +295,11 @@ h3 { font-size: 1.2rem; margin: 0 0 0.55rem; }
 .project-card h3 { margin: 0; }
 .project-card h3 a { color: var(--text); text-decoration: none; }
 .project-card > p { margin: 0; color: var(--muted); }
-.project-card footer { margin-top: auto; }
+.project-card footer { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: auto; }
 .project-title-zh { margin: 0.2rem 0 0; color: var(--warm); font-size: 0.88rem; }
 .text-link { font-weight: 750; text-decoration: none; }
+.secondary-project-link { color: var(--muted); }
+.secondary-separator { display: inline-block; margin: 0 0.45rem; color: var(--line); }
 
 .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tag { border: 1px solid var(--line); border-radius: 999px; background: var(--surface-soft); color: var(--accent-strong); font-size: 0.76rem; padding: 0.2rem 0.5rem; }
@@ -366,6 +368,54 @@ h3 { font-size: 1.2rem; margin: 0 0 0.55rem; }
 .contact-label { color: var(--warm); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; }
 .contact-link { display: inline-block; color: var(--text); font-size: 1.7rem; font-weight: 750; text-decoration: none; }
 .contact-section p { color: var(--muted); }
+.contact-list { display: grid; gap: 1.2rem; }
+.contact-list article {
+  display: grid;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+.contact-list article span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.email-reveal {
+  display: grid;
+  gap: 0.6rem;
+}
+.email-reveal-compact {
+  gap: 0.45rem;
+}
+.email-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+.email-actions button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--accent-strong);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  padding: 0.28rem 0.55rem;
+}
+.email-actions button:hover {
+  border-color: var(--accent);
+}
+.email-status {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.cv-email-text {
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
 .not-found { min-height: 65vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
 .not-found h1 { max-width: 12ch; font-size: 3.5rem; }
 .not-found p:not(.eyebrow) { color: var(--muted); }

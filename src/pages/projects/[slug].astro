@@ -16,14 +16,13 @@ const links = [
 ].filter(Boolean);
 ---
 
-<BaseLayout title={`${project.data.title} | Shiqing Gao`} description={project.data.summary}>
+<BaseLayout title={`${project.data.title} | Shiqing Gao`} description={project.data.summary} lang="en">
   <header class="container project-header">
-    <a class="back-link" href="/projects">← All projects / 返回项目</a>
+    <a class="back-link" href="/projects">&lt;- All projects</a>
     <div class="project-header-grid">
       <div>
         <p class="eyebrow">{project.data.category}</p>
         <h1>{project.data.title}</h1>
-        {project.data.titleZh && <p class="project-heading-zh">{project.data.titleZh}</p>}
         <p class="project-summary">{project.data.summary}</p>
       </div>
       <dl class="project-facts">
@@ -42,7 +41,7 @@ const links = [
       </div>
       {links.length > 0 && (
         <div class="project-links">
-          {links.map((link: any) => <a href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>)}
+          {links.map((link: any) => <a href={link.href}>{link.label} <span aria-hidden="true">-&gt;</span></a>)}
         </div>
       )}
     </aside>

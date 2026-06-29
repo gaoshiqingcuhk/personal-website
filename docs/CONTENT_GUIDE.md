@@ -34,7 +34,7 @@ Optional fields include `titleZh`, `summaryZh`, `date`, `repoUrl`, `demoUrl`, `r
 ## CV
 
 - Edit CV content in `src/data/cv.ts`.
-- Set `showGpa` to `false` to hide GPA from both the web and PDF versions.
+- Keep education entries concise and public-facing.
 - Empty arrays and missing optional links are hidden from public pages.
 
 To regenerate the PDF, keep the dev server running at `http://localhost:4321`, then run:

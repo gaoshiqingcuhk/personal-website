@@ -7,6 +7,7 @@ interface Props {
 
 const { project } = Astro.props;
 const projectUrl = `/projects/${project.slug}`;
+const repoUrl = project.data.repoUrl;
 ---
 
 <article class="project-card">
@@ -16,13 +17,13 @@ const projectUrl = `/projects/${project.slug}`;
   </div>
   <div>
     <h3><a href={projectUrl}>{project.data.title}</a></h3>
-    {project.data.titleZh && <p class="project-title-zh">{project.data.titleZh}</p>}
   </div>
   <p>{project.data.summary}</p>
   <div class="tag-list" aria-label="Project tags">
     {project.data.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
   </div>
   <footer>
-    <a class="text-link" href={projectUrl}>View project / 查看项目 <span aria-hidden="true">→</span></a>
+    <a class="text-link" href={projectUrl}>View project <span aria-hidden="true">-&gt;</span></a>
+    {repoUrl && <a class="text-link secondary-project-link" href={repoUrl}>GitHub <span aria-hidden="true">-&gt;</span></a>}
   </footer>
 </article>

@@ -1,16 +1,14 @@
 export const site = {
-  title: "Shiqing Gao | Personal Website",
+  title: "Shiqing Gao | Mathematics Undergraduate",
   description:
-    "Personal website of Shiqing Gao, a mathematics undergraduate at The Chinese University of Hong Kong. A space for projects, writing, CV, and small explorations across mathematics, computing, design, and language.",
+    "Personal website of Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong interested in computational inverse problems, scientific computing, numerical methods, uncertainty quantification, and selected computational projects.",
   domain: "https://www.gaoshiqing.space",
   navigation: [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About / 关于" },
-    { href: "/projects", label: "Projects / 项目" },
-    { href: "/writing", label: "Writing / 文字" },
-    { href: "/life", label: "Life / 兴趣" },
+    { href: "/about", label: "About" },
+    { href: "/projects", label: "Projects" },
     { href: "/cv", label: "CV" },
     { href: "/contact", label: "Contact" }
   ],
-  footer: "A growing space for projects, writing, and small explorations."
+  footer: "A concise record of undergraduate computational projects and learning notes."
 } as const;

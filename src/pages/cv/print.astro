@@ -24,37 +24,37 @@ import { cv } from "../../data/cv";
         margin: 0;
         color: var(--text);
         background: #fff;
-        font-size: 9.7pt;
-        line-height: 1.35;
+        font-size: 9.4pt;
+        line-height: 1.32;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
       }
       a { color: var(--accent); text-decoration: none; }
       h1, h2, h3, p { margin: 0; }
-      h1 { font-size: 25pt; line-height: 1; }
+      h1 { font-size: 24pt; line-height: 1; }
       h2 {
         border-bottom: 1px solid var(--line);
         color: var(--accent);
-        font-size: 10pt;
+        font-size: 9.8pt;
         letter-spacing: 0.08em;
         margin-bottom: 4pt;
         padding-bottom: 2.5pt;
         text-transform: uppercase;
       }
-      h3 { font-size: 10.5pt; margin-bottom: 1.5pt; }
+      h3 { font-size: 10.2pt; margin-bottom: 1.5pt; }
       ul { margin: 3pt 0 0 13pt; padding: 0; }
-      li { margin: 1pt 0; }
+      li { margin: 0.8pt 0; }
       .print-header {
         border-bottom: 2px solid var(--accent);
         display: grid;
         grid-template-columns: 1fr auto;
         gap: 14pt;
-        margin-bottom: 9pt;
+        margin-bottom: 8pt;
         padding-bottom: 7pt;
       }
-      .print-title { color: var(--muted); font-size: 11.5pt; margin-top: 3pt; }
-      .print-contact { color: var(--muted); font-size: 9pt; line-height: 1.4; text-align: right; }
-      .print-section { break-inside: avoid; margin-top: 7pt; page-break-inside: avoid; }
+      .print-title { color: var(--muted); font-size: 11pt; margin-top: 3pt; }
+      .print-contact { color: var(--muted); font-size: 8.7pt; line-height: 1.35; text-align: right; }
+      .print-section { break-inside: avoid; margin-top: 6pt; page-break-inside: avoid; }
       .print-entry { display: grid; grid-template-columns: 1fr auto; gap: 10pt; }
       .print-meta { color: var(--muted); text-align: right; white-space: nowrap; }
       .interest-list, .course-list {
@@ -71,7 +71,7 @@ import { cv } from "../../data/cv";
         margin: 0;
         padding: 1.5pt 5pt;
       }
-      .project { break-inside: avoid; margin-top: 5pt; page-break-inside: avoid; }
+      .project { break-inside: avoid; margin-top: 4.5pt; page-break-inside: avoid; }
       .project:first-of-type { margin-top: 0; }
       .tools { color: var(--muted); margin-top: 2pt; }
       .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 3pt 12pt; }
@@ -89,6 +89,8 @@ import { cv } from "../../data/cv";
         <div><h1>{cv.name}</h1><p class="print-title">{cv.title}</p></div>
         <div class="print-contact">
           <div>{cv.location}</div>
+          <div>{cv.emailLabel}</div>
+          <div><a href={cv.github}>github.com/gaoshiqingcuhk</a></div>
           <div><a href={cv.website}>www.gaoshiqing.space</a></div>
         </div>
       </header>
@@ -98,7 +100,6 @@ import { cv } from "../../data/cv";
         {cv.education.map((item) => (
           <article class="print-entry">
             <div><h3>{item.institution}</h3><p>{item.degree}</p></div>
-            <p class="print-meta">{item.standing}{item.showGpa && item.gpa ? ` · GPA: ${item.gpa}` : ""}</p>
           </article>
         ))}
       </section>
@@ -109,7 +110,7 @@ import { cv } from "../../data/cv";
       </section>
 
       <section class="print-section">
-        <h2>Projects</h2>
+        <h2>Selected Projects</h2>
         {cv.projects.map((project) => (
           <article class="project">
             <h3>{project.url ? <a href={new URL(project.url, cv.website)}>{project.name}</a> : project.name}</h3>

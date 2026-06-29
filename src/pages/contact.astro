@@ -1,23 +1,42 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import { profile } from "../data/profile";
 ---
 
 <BaseLayout
   title="Contact | Shiqing Gao"
-  description="Contact and website information for Shiqing Gao."
+  description="Email, GitHub, and website information for Shiqing Gao."
+  lang="en"
 >
   <header class="container page-header personal-header">
-    <p class="eyebrow">Contact / 联系</p>
-    <h1>For projects, learning, writing, or other interesting ideas.</h1>
-    <p>如果你想交流项目、学习、写作或其他有趣的想法，可以通过这里找到我。更多联系方式会在适合公开时加入。</p>
+    <p class="eyebrow">Contact</p>
+    <h1>Contact information.</h1>
+    <p>
+      The routes below are my current public contact links for academic,
+      technical, and project-related messages.
+    </p>
   </header>
 
   <section class="container contact-section section">
-    <div class="contact-label">Website</div>
-    <div>
-      <a class="contact-link" href={profile.website}>www.gaoshiqing.space <span aria-hidden="true">↗</span></a>
-      <p>This website is currently the public point of contact.</p>
+    <div class="contact-label">Contact</div>
+    <div class="contact-list">
+      <article>
+        <span>Email</span>
+        <ObfuscatedEmail
+          label={profile.emailLabel}
+          parts={profile.emailParts}
+        />
+      </article>
+      <article>
+        <span>GitHub</span>
+        <a class="contact-link" href={profile.github}>github.com/gaoshiqingcuhk</a>
+      </article>
+      <article>
+        <span>Website</span>
+        <a class="contact-link" href={profile.website}>www.gaoshiqing.space</a>
+      </article>
+      <p>Only current public contact routes are listed here.</p>
     </div>
   </section>
 </BaseLayout>

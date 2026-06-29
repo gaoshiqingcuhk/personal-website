@@ -1,45 +1,57 @@
 ---
-title: "Image Inverse Problems / Denoising MVP"
-titleZh: "图像反问题实验项目"
-status: "Ongoing exploration"
+title: "Image Inverse Problems: Denoising and Deblurring"
+date: 2026-06-01
+status: "Completed computational project"
 category: "Academic / Technical"
-tags: ["Computational Imaging", "Inverse Problems", "Scientific Computing"]
-summary: "A small experimental pipeline for studying image denoising as an entry point to inverse problems."
-summaryZh: "从图像去噪出发，理解反问题、正则化、评价指标与参数敏感性。"
-role: "Independent project"
+tags: ["Computational Inverse Problems", "Computational Imaging", "Scientific Computing"]
+summary: "A reproducible computational study of image denoising and deblurring as inverse problems under controlled synthetic degradations."
+role: "Independent undergraduate project"
 tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image"]
+repoUrl: "https://github.com/gaoshiqingcuhk/image-inverse-problems"
 featured: true
 ---
 
-## Overview / 项目概览
+## Overview
 
-This project uses image denoising as a concrete entry point to inverse problems. Instead of treating denoising as a single filter call, I organized it as a small experimental pipeline: create or observe degradation, choose a reconstruction method, compare outputs, measure quality, and study how parameters change the result.
+This project studies image denoising and deblurring as representative image inverse problems. I used controlled synthetic degradations to compare reconstruction behavior across classical filtering, variational regularization, non-local patch-based methods, frequency-domain deconvolution, iterative deconvolution, and a lightweight CNN denoising baseline.
 
-这是一个以图像去噪为入口的反问题实验项目。我希望把“加噪—恢复—评价—复盘”做成一条完整、可重复的实验链路，而不只是得到一张看起来更干净的图片。
+The project is framed as a reproducible undergraduate computational study rather than a new reconstruction method or a state-of-the-art claim.
 
-## What I built / 做了什么
+## What I Studied / Implemented
 
-- A repeatable workflow for noisy and reconstructed image comparison
-- Gaussian filtering as a simple baseline
-- Tikhonov regularization and total variation denoising experiments
-- PSNR and SSIM evaluation
-- Noise-level and parameter sensitivity analysis
-- Multi-image testing and a compact written report
+- Denoising and deblurring as inverse problems
+- Gaussian filtering as a simple denoising baseline
+- Tikhonov regularization and total variation Chambolle denoising
+- Non-local means as a patch-based image-prior method
+- Wiener and Richardson-Lucy deconvolution for deblurring
+- A small CPU-friendly CNN denoising baseline for comparison
+- PSNR, SSIM, runtime, visual comparisons, and error maps
+- Noise-level, blur-strength, parameter-sensitivity, and robustness checks
 
-## Methods / 方法
+## Methods or Workflow
 
-Gaussian filtering provides an intuitive baseline but can smooth important edges. Tikhonov regularization introduces an explicit balance between data fidelity and smoothness. Total variation denoising offers another perspective by encouraging piecewise-smooth reconstructions while preserving sharper transitions.
+The workflow starts by applying controlled noise or blur to sample grayscale images, then reconstructs the image with several methods. Each experiment records reconstruction settings, visual outputs, quantitative metrics, runtime information, and metadata so that the comparison is easier to inspect later.
 
-The main emphasis is not declaring one universally best method. It is understanding what each objective assumes about an image and how those assumptions appear in the reconstructed result.
+The repository is organized as a sequence of numbered scripts, from early denoising baselines through deblurring experiments, robustness analysis, and the lightweight CNN baseline. Classical regularization and image-prior methods are treated as strong reference baselines. The learning-based baseline is exploratory and is included mainly to compare behavior, not to claim a superior model.
 
-## Results and reflection / 结果与复盘
+## Outputs
 
-PSNR and SSIM provide consistent quantitative reference points, while side-by-side images reveal details that a single metric cannot capture. Sensitivity experiments also make the regularization trade-off visible: parameters that suppress more noise can also remove texture or soften edges.
+- Reproducible experiment scripts and saved configuration/metadata
+- CSV outputs for metrics, runtime, sensitivity studies, and method comparisons
+- Figures for visual comparisons, error maps, parameter sensitivity, and robustness checks
+- A small CNN checkpoint and training-history outputs
+- README, project summary, report notes, and figure/result indexes
 
-I am keeping this page qualitative until the underlying result tables and figures are published alongside the project. No numerical claims are shown here without a verifiable source.
+## What I Learned
 
-## Next steps / 下一步
+Classical methods remain strong, interpretable baselines in small controlled inverse-problem experiments. In the completed runs, TV denoising and non-local means were often competitive for denoising, while Tikhonov-style deblurring was a stable baseline in the synthetic Gaussian-blur setting. The lightweight CNN improved over noisy inputs but did not outperform stronger classical baselines in this small CPU-friendly setup.
 
-- Organize the experiment code and figures into a public repository
-- Publish the mini report and reproducible parameter settings
-- Compare behavior across a wider range of image structures and noise levels
+The project made the trade-off between noise removal, edge preservation, runtime, and parameter choice visible both in metrics and in reconstructed images.
+
+## Repository
+
+[View the GitHub repository](https://github.com/gaoshiqingcuhk/image-inverse-problems)
+
+## Limitations
+
+The experiments use controlled synthetic Gaussian noise and blur on small grayscale images, so the conclusions should not be read as general claims about real-world image restoration. The project does not cover real-world datasets, blind restoration, motion blur, or alternative boundary models. The CNN baseline is intentionally small and limited by the available training setup.

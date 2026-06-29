@@ -1,0 +1,64 @@
+---
+interface Props {
+  label: string;
+  parts: {
+    local: string;
+    domain: readonly string[];
+  };
+  linkClass?: string;
+  compact?: boolean;
+}
+
+const { label, parts, linkClass = "contact-link", compact = false } = Astro.props;
+const encodedParts = [parts.local, ...parts.domain].join("|");
+---
+
+<div class:list={["email-reveal", compact && "email-reveal-compact"]} data-email-parts={encodedParts}>
+  <span class={linkClass} data-email-output>{label}</span>
+  <div class="email-actions">
+    <button type="button" data-email-reveal>Reveal email</button>
+    <button type="button" data-email-copy>Copy email</button>
+    <span class="email-status" role="status" aria-live="polite"></span>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    if (window.__shiqingEmailRevealReady) return;
+    window.__shiqingEmailRevealReady = true;
+
+    const buildEmail = (rawParts) => {
+      const parts = rawParts.split("|");
+      const local = parts.shift();
+      return `${local}@${parts.join(".")}`;
+    };
+
+    document.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-email-reveal], [data-email-copy]");
+      if (!button) return;
+
+      const root = button.closest("[data-email-parts]");
+      if (!root) return;
+
+      const email = buildEmail(root.dataset.emailParts || "");
+      const output = root.querySelector("[data-email-output]");
+      const status = root.querySelector(".email-status");
+
+      if (button.matches("[data-email-reveal]")) {
+        output.textContent = email;
+        if (output.tagName === "A") output.href = `mailto:${email}`;
+        if (status) status.textContent = "Email revealed.";
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(email);
+        if (status) status.textContent = "Email copied.";
+      } catch {
+        output.textContent = email;
+        if (output.tagName === "A") output.href = `mailto:${email}`;
+        if (status) status.textContent = "Email revealed for copying.";
+      }
+    });
+  })();
+</script>

@@ -1,23 +1,28 @@
 export const profile = {
   name: "Shiqing Gao",
   displayName: "Shiqing Gao",
-  title: "Mathematics undergraduate",
+  title: "Undergraduate student in Mathematics",
   university: "The Chinese University of Hong Kong",
   major: "Mathematics",
   location: "Hong Kong",
+  emailLabel: "1155233234 [at] link [dot] cuhk [dot] edu [dot] hk",
+  emailParts: {
+    local: "1155233234",
+    domain: ["link", "cuhk", "edu", "hk"]
+  },
   website: "https://www.gaoshiqing.space/",
-  bio: "我目前在香港中文大学读数学。本科阶段，我一方面在学习应用数学、统计建模、计算成像等方向，另一方面也喜欢做具体的小项目，把抽象的想法变成可以展示、解释和复盘的东西。",
+  github: "https://github.com/gaoshiqingcuhk",
+  bio:
+    "I am an undergraduate mathematics student at The Chinese University of Hong Kong. I am currently building small computational projects while learning applied mathematics, inverse problems, scientific computing, numerical methods, uncertainty quantification, and machine learning-related inverse problems.",
   englishSummary:
-    "I am a mathematics undergraduate at The Chinese University of Hong Kong, interested in applied mathematics, computational imaging, inverse problems, statistical modeling, and project-based learning.",
+    "I am an undergraduate mathematics student at The Chinese University of Hong Kong, interested in computational inverse problems, scientific computing, numerical methods, uncertainty quantification, and machine learning-related inverse problems.",
   interests: [
-    "Applied Mathematics",
-    "Inverse Problems",
-    "Computational Imaging",
-    "Statistical Modeling",
+    "Computational Inverse Problems",
     "Scientific Computing",
-    "Mathematical Modeling",
-    "Data Science",
-    "Machine Learning"
+    "Numerical Methods",
+    "Uncertainty Quantification",
+    "Machine Learning-related Inverse Problems",
+    "Applied Mathematics"
   ],
-  broaderInterests: ["Writing", "Language", "Design", "Music", "Clubs", "Games"]
+  broaderInterests: ["Writing", "Language", "Design", "Music"]
 } as const;

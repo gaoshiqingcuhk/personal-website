@@ -1,9 +1,6 @@
 export type EducationItem = {
   institution: string;
   degree: string;
-  standing: string;
-  gpa?: string;
-  showGpa: boolean;
 };
 
 export type CvProject = {
@@ -20,63 +17,76 @@ export type SkillGroup = {
 
 export const cv = {
   name: "Shiqing Gao",
-  title: "Mathematics Undergraduate",
+  title: "Undergraduate Student in Mathematics",
   location: "Hong Kong",
+  emailLabel: "1155233234 [at] link [dot] cuhk [dot] edu [dot] hk",
+  emailParts: {
+    local: "1155233234",
+    domain: ["link", "cuhk", "edu", "hk"]
+  },
   website: "https://www.gaoshiqing.space/",
+  github: "https://github.com/gaoshiqingcuhk",
   education: [
     {
       institution: "The Chinese University of Hong Kong",
-      degree: "B.Sc. in Mathematics",
-      standing: "Sophomore",
-      gpa: "3.4/4.0",
-      showGpa: true
+      degree: "B.Sc. in Mathematics, expected 2028"
     }
   ] satisfies EducationItem[],
   interests: [
-    "Applied Mathematics",
-    "Computational Imaging",
-    "Inverse Problems",
-    "Statistical Modeling",
-    "Data Science",
+    "Computational Inverse Problems",
     "Scientific Computing",
-    "Machine Learning"
+    "Numerical Methods",
+    "Uncertainty Quantification",
+    "Machine Learning-related Inverse Problems",
+    "Applied Mathematics"
   ],
   projects: [
     {
-      name: "Image Inverse Problems / Denoising MVP",
+      name: "Image Inverse Problems: Denoising and Deblurring",
       bullets: [
-        "Built a small experimental pipeline for image denoising as an entry point to inverse problems.",
-        "Compared Gaussian filtering, Tikhonov regularization, and total variation denoising.",
-        "Evaluated reconstruction quality using PSNR and SSIM.",
-        "Conducted parameter sensitivity analysis and multi-image testing."
+        "Completed a reproducible undergraduate computational study of denoising and deblurring under controlled synthetic degradations.",
+        "Compared Gaussian filtering, Tikhonov regularization, TV denoising, non-local means, Wiener deconvolution, Richardson-Lucy deconvolution, and a small CNN baseline.",
+        "Evaluated PSNR, SSIM, runtime, visual comparisons, error maps, parameter sensitivity, and degradation robustness."
       ],
       tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image"],
       url: "/projects/image-inverse-problems-denoising"
     },
     {
-      name: "Mathematical Modeling Practice",
+      name: "Subdiffusion Mode Decay",
       bullets: [
-        "Practiced problem formulation, assumption design, model construction, and result interpretation.",
-        "Focused on translating open-ended questions into quantitative models and structured reports."
+        "Completed a toy spectral visualization comparing Fourier mode decay in normal diffusion and time-fractional subdiffusion.",
+        "Used a sine eigenbasis on Omega = (0, 1) with exponential and Mittag-Leffler-type decay factors.",
+        "Documented the limitation that the project is a visualization, not a full inverse solver."
       ],
-      tools: ["Python", "LaTeX", "Mathematical Modeling"],
-      url: "/projects/modeling-competition-practice"
+      tools: ["Python", "NumPy", "matplotlib"],
+      url: "/projects/subdiffusion-mode-decay"
     },
     {
-      name: "Personal Website",
+      name: "Machine Learning Uncertainty Quantification",
       bullets: [
-        "Built a bilingual personal website for projects, writing, CV, and personal exploration.",
-        "Developed as a static site with reusable content structures and a print-ready CV."
+        "Completed a reproducible regression uncertainty project using the UCI Energy Efficiency dataset with Heating Load as the target.",
+        "Compared approximate Gaussian process intervals, split conformal prediction, naive bootstrap intervals, and residual-corrected bootstrap intervals.",
+        "Studied empirical coverage, interval width, repeated-split stability, reduced-training-size behavior, and perturbed-input robustness."
       ],
-      tools: ["Astro", "TypeScript", "HTML", "CSS"],
-      url: "/projects/personal-website"
+      tools: ["Python", "NumPy", "pandas", "scikit-learn", "matplotlib"],
+      url: "/projects/machine-learning-uncertainty-quantification"
+    },
+    {
+      name: "Mathematical Modeling and Optimization",
+      bullets: [
+        "Completed a chip thermal management modeling workflow using surrogate models for thermal resistance, pressure drop, and temperature nonuniformity.",
+        "Used Pareto filtering, weighted-sum ranking, TOPSIS, weight-scenario analysis, random weight sampling, and Monte Carlo perturbation checks.",
+        "Produced tables, figures, and written analysis focused on assumptions, trade-offs, robustness, and limitations."
+      ],
+      tools: ["Python", "NumPy", "pandas", "matplotlib", "LaTeX"],
+      url: "/projects/mathematical-modeling-optimization"
     }
   ] satisfies CvProject[],
   skills: [
     { category: "Programming", items: ["Python", "C++", "TypeScript basics"] },
     {
-      category: "Data / Scientific Computing",
-      items: ["NumPy", "pandas", "matplotlib", "scikit-image"]
+      category: "Scientific Computing / Data",
+      items: ["NumPy", "pandas", "matplotlib", "scikit-image", "scikit-learn"]
     },
     { category: "Web", items: ["Astro", "HTML", "CSS", "Vercel"] },
     { category: "Writing / Tools", items: ["LaTeX", "Markdown", "Git"] }

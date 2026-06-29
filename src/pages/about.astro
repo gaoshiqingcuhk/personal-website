@@ -5,19 +5,25 @@ import { profile } from "../data/profile";
 
 <BaseLayout
   title="About | Shiqing Gao"
-  description="About Shiqing Gao, a mathematics undergraduate interested in applied mathematics, computational imaging, writing, and project-based learning."
+  description="About Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong interested in computational inverse problems and scientific computing."
+  lang="en"
 >
   <header class="container page-header personal-header">
-    <p class="eyebrow">About / 关于我</p>
-    <h1>在数学之外，也在具体的项目里认识问题。</h1>
+    <p class="eyebrow">About</p>
+    <h1>Learning mathematics through small computational projects.</h1>
     <p class="english-lead">{profile.englishSummary}</p>
   </header>
 
   <section class="container about-intro section">
-    <div class="about-label">A little context</div>
+    <div class="about-label">Context</div>
     <div class="prose bilingual-prose">
       <p>{profile.bio}</p>
-      <p>我喜欢通过项目学习：先做出一个最小可运行版本，再逐步加入实验、指标、可视化和文字总结。这个网站也是这个过程的一部分，它让我认真考虑什么值得展示、怎样表达才算清楚，以及下一步应该往哪里走。</p>
+      <p>
+        I am still early in my undergraduate training, so I try to keep the work
+        on this site modest and verifiable. My current habit is to build a small
+        numerical experiment, check what fails, and write down the assumptions,
+        metrics, and next questions clearly.
+      </p>
     </div>
   </section>
 
@@ -25,23 +31,35 @@ import { profile } from "../data/profile";
     <div class="container about-grid">
       <article class="about-section">
         <span>01</span>
-        <h2>Currently / 最近</h2>
-        <p>正在继续整理图像反问题实验，完善个人网站，并把零散的项目过程写成更容易复盘的记录。</p>
+        <h2>Current Focus</h2>
+        <p>
+          Image inverse problems, denoising/deblurring experiments, spectral
+          intuition for diffusion models, and uncertainty-aware machine learning
+          evaluation.
+        </p>
       </article>
       <article class="about-section">
         <span>02</span>
-        <h2>What I’m exploring / 我在探索</h2>
-        <p>{profile.interests.join(" · ")}</p>
+        <h2>Interests</h2>
+        <p>{profile.interests.join(" / ")}</p>
       </article>
       <article class="about-section">
         <span>03</span>
-        <h2>How I learn / 学习方式</h2>
-        <p>Build a small version, test it, look for failure cases, and write down what changed. 我更喜欢用可以运行、比较和解释的东西来检验理解。</p>
+        <h2>How I Learn</h2>
+        <p>
+          Build a minimal working version, compare against baselines, evaluate
+          with simple metrics, inspect failure cases, and keep notes clear enough
+          to revisit later.
+        </p>
       </article>
       <article class="about-section">
         <span>04</span>
-        <h2>Beyond coursework / 课程之外</h2>
-        <p>我也关心写作、语言、设计、音乐、社团和游戏。这些兴趣不一定都需要变成“成果”，但会影响我观察和表达问题的方式。</p>
+        <h2>Beyond Coursework</h2>
+        <p>
+          I also care about writing, language, design, and making technical work
+          understandable. Those interests stay secondary to the academic project
+          pages, but they shape how I present work.
+        </p>
       </article>
     </div>
   </section>
