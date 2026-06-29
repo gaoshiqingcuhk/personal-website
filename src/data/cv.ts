@@ -92,12 +92,14 @@ export const cv = {
     { category: "Writing / Tools", items: ["LaTeX", "Markdown", "Git"] }
   ] satisfies SkillGroup[],
   coursework: [
-    "Calculus",
-    "Linear Algebra",
-    "Probability",
-    "Statistics",
-    "Vector Calculus",
-    "Mathematical Modeling"
+    "Linear Algebra I",
+    "Honours Linear Algebra II",
+    "Advanced Calculus I-II",
+    "Mathematical Analysis I",
+    "Complex Variables with Applications",
+    "Basic Concepts in Statistics and Probability I",
+    "Fundamental Computing with C++",
+    "Data Structures and Applications"
   ],
   awardsActivities: [] as string[]
 };

@@ -4,7 +4,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { sortProjectsByDate } from "../../utils/projects";
 
-const projects = sortProjectsByDate(await getCollection("projects"));
+const selectedProjectSlugs = new Set([
+  "image-inverse-problems-denoising",
+  "subdiffusion-mode-decay",
+  "machine-learning-uncertainty-quantification",
+  "mathematical-modeling-optimization"
+]);
+
+const projects = sortProjectsByDate(await getCollection("projects")).filter((project) =>
+  selectedProjectSlugs.has(project.slug)
+);
 const categories = ["Academic / Technical", "Meta", "Creative / Personal"] as const;
 ---
 
