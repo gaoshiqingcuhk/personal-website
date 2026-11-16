@@ -1,36 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const sections = [
+const interests = [
   ["Writing", "Practicing clear explanations and keeping technical notes readable."],
-  ["Language", "Thinking about precise expression across English and Chinese."],
+  ["Languages", "Thinking about precise expression across English and Chinese."],
   ["Design", "Noticing how layout, typography, and structure affect readability."],
   ["Music", "A small personal interest that helps keep study and daily life balanced."]
 ];
 ---
 
-<BaseLayout
-  title="Life | Shiqing Gao"
-  description="A low-key personal interests page for Shiqing Gao."
-  lang="en"
->
-  <header class="container page-header personal-header">
-    <p class="eyebrow">Life</p>
-    <h1>A small secondary page for personal context.</h1>
-    <p>
-      This page is intentionally simple. It gives a little context beyond coursework
-      and projects, while keeping the website's main focus on academic and
-      computational work.
-    </p>
-  </header>
-
-  <section class="container life-grid section">
-    {sections.map(([title, copy], index) => (
-      <article class="life-item">
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <h2>{title}</h2>
-        <p>{copy}</p>
-      </article>
-    ))}
-  </section>
+<BaseLayout title="Life | Shiqing Gao" description="Shiqing Gao's interests in writing, languages, design, and music." noindex>
+  <div class="container reading-page narrow-page">
+    <header class="page-header">
+      <h1>Life</h1>
+      <p>A few interests beyond mathematics.</p>
+    </header>
+    <dl class="life-list">
+      {interests.map(([title, description]) => (
+        <div><dt>{title}</dt><dd>{description}</dd></div>
+      ))}
+    </dl>
+  </div>
 </BaseLayout>

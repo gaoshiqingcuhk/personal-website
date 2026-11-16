@@ -5,62 +5,40 @@ import { profile } from "../data/profile";
 
 <BaseLayout
   title="About | Shiqing Gao"
-  description="About Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong interested in computational inverse problems and scientific computing."
-  lang="en"
+  description="About Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong."
 >
-  <header class="container page-header personal-header">
-    <p class="eyebrow">About</p>
-    <h1>Learning mathematics through small computational projects.</h1>
-    <p class="english-lead">{profile.englishSummary}</p>
-  </header>
+  <div class="container reading-page">
+    <header class="page-header">
+      <h1>About</h1>
+      <p>I am an undergraduate mathematics student at {profile.university}.</p>
+    </header>
 
-  <section class="container about-intro section">
-    <div class="about-label">Context</div>
-    <div class="prose bilingual-prose">
-      <p>{profile.bio}</p>
-      <p>
-        I am still early in my undergraduate training, so I try to keep the work
-        on this site modest and verifiable. My current habit is to build a small
-        numerical experiment, check what fails, and write down the assumptions,
-        metrics, and next questions clearly.
-      </p>
-    </div>
-  </section>
+    <section class="editorial-section" aria-labelledby="focus">
+      <h2 id="focus">Current interests</h2>
+      <ul class="marginal-list">
+        {profile.currentInterests.map((interest) => <li>{interest}</li>)}
+      </ul>
+    </section>
 
-  <section class="section section-band">
-    <div class="container about-grid">
-      <article class="about-section">
-        <span>01</span>
-        <h2>Current Focus</h2>
+    <section class="editorial-section" aria-labelledby="experiments">
+      <h2 id="experiments">Computational work</h2>
+      <div class="prose">
         <p>
-          Image inverse problems, denoising/deblurring experiments, spectral
-          intuition for diffusion models, and uncertainty-aware machine learning
-          evaluation.
+          My computational projects explore image inverse problems, spectral
+          intuition for diffusion, and uncertainty in machine learning.
+          I like to start with a small numerical experiment, compare it with
+          a baseline, and write down what failed as well as what worked.
         </p>
-      </article>
-      <article class="about-section">
-        <span>02</span>
-        <h2>Interests</h2>
-        <p>{profile.interests.join(" / ")}</p>
-      </article>
-      <article class="about-section">
-        <span>03</span>
-        <h2>How I Learn</h2>
-        <p>
-          Build a minimal working version, compare against baselines, evaluate
-          with simple metrics, inspect failure cases, and keep notes clear enough
-          to revisit later.
-        </p>
-      </article>
-      <article class="about-section">
-        <span>04</span>
-        <h2>Beyond Coursework</h2>
-        <p>
-          I also care about writing, language, design, and making technical work
-          understandable. Those interests stay secondary to the academic project
-          pages, but they shape how I present work.
-        </p>
-      </article>
-    </div>
-  </section>
+        <a href="/projects">Browse the projects <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="editorial-section" aria-labelledby="elsewhere">
+      <h2 id="elsewhere">Beyond coursework</h2>
+      <div class="prose">
+        <p>I am also interested in writing, languages, design, and music.</p>
+        <div class="inline-links"><a href="/cv">CV</a><a href="/contact">Contact</a></div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

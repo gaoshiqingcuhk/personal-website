@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
+import ProjectEntry from "../../components/ProjectEntry.astro";
+import { profile } from "../../data/profile";
 import { sortProjectsByDate } from "../../utils/projects";
 
 const selectedProjectSlugs = new Set([
@@ -14,43 +15,30 @@ const selectedProjectSlugs = new Set([
 const projects = sortProjectsByDate(await getCollection("projects")).filter((project) =>
   selectedProjectSlugs.has(project.slug)
 );
-const categories = ["Academic / Technical", "Meta", "Creative / Personal"] as const;
 ---
 
 <BaseLayout
   title="Projects | Shiqing Gao"
-  description="Selected undergraduate computational projects by Shiqing Gao in inverse problems, subdiffusion visualization, uncertainty quantification, modeling, and optimization."
-  lang="en"
+  description="Research and computational projects by Shiqing Gao in Lean 4, mathematical proof checking, inverse problems, uncertainty quantification, and optimization."
 >
-  <header class="container page-header personal-header">
-    <p class="eyebrow">Projects</p>
-    <h1>Selected undergraduate computational projects.</h1>
-    <p>
-      This page collects selected projects in applied mathematics, computational
-      inverse problems, scientific computing, uncertainty quantification, and
-      modeling. The descriptions are intentionally modest and focus on what was
-      implemented, evaluated, and documented.
-    </p>
-  </header>
-
-  <div class="container category-stack">
-    {
-      categories.map((category) => {
-        const items = projects.filter((project) => project.data.category === category);
-        if (items.length === 0) return null;
-
-        return (
-          <section class="project-category">
-            <div class="category-heading">
-              <h2>{category}</h2>
-              <span>{items.length.toString().padStart(2, "0")}</span>
+  <div class="container reading-page">
+    <header class="page-header">
+      <h1>Projects</h1>
+      <p>Ongoing research and selected computational projects.</p>
+    </header>
+    <ol class="editorial-list project-index">
+      {profile.research.map((item, index) => (
+        <li>
+          <article class="indexed-entry project-entry">
+            <span class="folio" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h2 class="project-entry-title">{item.title}</h2>
+              <p class="entry-summary">{item.context}</p>
             </div>
-            <div class="grid project-grid">
-              {items.map((project) => <ProjectCard project={project} />)}
-            </div>
-          </section>
-        );
-      })
-    }
+          </article>
+        </li>
+      ))}
+      {projects.map((project, index) => <li><ProjectEntry project={project} index={index + profile.research.length} /></li>)}
+    </ol>
   </div>
 </BaseLayout>

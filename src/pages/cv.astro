@@ -9,10 +9,9 @@ import { cv } from "../data/cv";
   description="Academic CV of Shiqing Gao, an undergraduate mathematics student at The Chinese University of Hong Kong."
   lang="en"
 >
-  <header class="cv-hero">
-    <div class="cv-wrap cv-hero-grid">
+  <header class="container cv-wrap page-header cv-header">
       <div>
-        <p class="eyebrow">Curriculum Vitae</p>
+        <p class="document-label">Curriculum Vitae</p>
         <h1>{cv.name}</h1>
         <p class="cv-title">{cv.title}</p>
         <p class="cv-summary">
@@ -22,8 +21,8 @@ import { cv } from "../data/cv";
           inverse problems.
         </p>
       </div>
-      <aside class="cv-contact-card" aria-label="CV links">
-        <a class="button primary cv-download" href="/Shiqing_Gao_CV.pdf">Download PDF</a>
+      <aside class="cv-contact" aria-label="CV links">
+        <a class="cv-download" href="/Shiqing_Gao_CV.pdf">Download PDF <span aria-hidden="true">&darr;</span></a>
         <dl>
           <div>
             <dt>Email</dt>
@@ -41,10 +40,9 @@ import { cv } from "../data/cv";
           <div><dt>Location</dt><dd>{cv.location}</dd></div>
         </dl>
       </aside>
-    </div>
   </header>
 
-  <div class="cv-wrap cv-page">
+  <div class="container cv-wrap cv-page">
     <section class="cv-section">
       <div class="cv-section-heading"><span>01</span><h2>Education</h2></div>
       {cv.education.map((item) => (
@@ -56,7 +54,7 @@ import { cv } from "../data/cv";
 
     <section class="cv-section">
       <div class="cv-section-heading"><span>02</span><h2>Research Interests</h2></div>
-      <div class="cv-pill-grid">{cv.interests.map((interest) => <span>{interest}</span>)}</div>
+      <ul class="cv-interest-list">{cv.interests.map((interest) => <li>{interest}</li>)}</ul>
     </section>
 
     <section class="cv-section cv-projects-section">

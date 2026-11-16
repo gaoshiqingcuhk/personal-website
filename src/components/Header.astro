@@ -1,25 +1,22 @@
 ---
 import { site } from "../data/site";
+import { profile } from "../data/profile";
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <header class="site-header">
   <nav class="container nav" aria-label="Primary navigation">
-    <a class="brand" href="/" aria-label="Shiqing Gao home">
-      <span class="brand-mark" aria-hidden="true">SG</span>
-      <span class="brand-copy">
-        <strong>Shiqing Gao</strong>
-        <small>Mathematics | Computing | Projects</small>
-      </span>
-    </a>
+    {currentPath !== "/" && (
+      <a class="brand" href="/" aria-label={`${profile.name} (home)`}>{profile.name}</a>
+    )}
     <div class="nav-links">
       {
         site.navigation.map((item) => {
           const itemPath = item.href.replace(/\/$/, "") || "/";
           const isCurrent =
             currentPath === itemPath ||
-            (item.href !== "/" && currentPath.startsWith(itemPath));
+            currentPath.startsWith(`${itemPath}/`);
 
           return (
             <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
@@ -28,6 +25,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
           );
         })
       }
+      <a href={profile.github}>GitHub</a>
     </div>
   </nav>
 </header>

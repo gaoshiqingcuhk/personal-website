@@ -3,7 +3,7 @@ import { site } from "../data/site";
 
 export async function GET() {
   const projects = await getCollection("projects");
-  const staticPaths = ["/", "/about", "/projects", "/writing", "/life", "/cv", "/contact"];
+  const staticPaths = ["/", "/about", "/projects", "/cv", "/contact"];
   const projectPaths = projects.map((project) => `/projects/${project.slug}`);
   const urls = [...staticPaths, ...projectPaths]
     .map((path) => `  <url><loc>${new URL(path, site.domain).href}</loc></url>`)

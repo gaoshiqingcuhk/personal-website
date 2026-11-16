@@ -2,33 +2,24 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="Writing | Shiqing Gao"
-  description="Low-key learning notes and project reflections by Shiqing Gao."
-  lang="en"
->
-  <header class="container page-header personal-header">
-    <p class="eyebrow">Writing</p>
-    <h1>Notes before they become polished conclusions.</h1>
-    <p>
-      This page is reserved for learning notes, project reflections, and short
-      explanations. I will only add posts when they are complete enough to be
-      useful publicly.
-    </p>
-  </header>
-
-  <section class="container writing-empty section">
-    <div class="writing-index" aria-hidden="true">W-01</div>
-    <div>
-      <h2>A quiet holding page, not a filled-out blog.</h2>
+<BaseLayout title="Writing | Shiqing Gao" description="Notes and project reflections by Shiqing Gao." noindex>
+  <div class="container reading-page narrow-page">
+    <header class="page-header">
+      <h1>Writing &amp; notes</h1>
+      <p>Learning notes, project reflections, and short explanations.</p>
+    </header>
+    <section class="journal-section prose" aria-labelledby="project-notes">
+      <h2 id="project-notes">Notes from projects</h2>
       <p>
-        Future notes may include reflections on inverse problems, numerical
-        experiments, uncertainty quantification, and modeling workflows. For now,
-        the main public content lives on the project pages and CV.
+        For now, my writing lives alongside the experiments. These notes cover
+        the methods, what I learned, and where the results fall short.
       </p>
-      <p class="english-note">
-        This area is intentionally secondary to the academic project pages.
-      </p>
-    </div>
-  </section>
+      <ul class="marginal-list">
+        <li><a href="/projects/image-inverse-problems-denoising">Image denoising and deblurring</a></li>
+        <li><a href="/projects/subdiffusion-mode-decay">Fourier mode decay in subdiffusion</a></li>
+        <li><a href="/projects/machine-learning-uncertainty-quantification">Uncertainty in regression predictions</a></li>
+        <li><a href="/projects/mathematical-modeling-optimization">Trade-offs in thermal management</a></li>
+      </ul>
+    </section>
+  </div>
 </BaseLayout>

@@ -4,39 +4,25 @@ import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import { profile } from "../data/profile";
 ---
 
-<BaseLayout
-  title="Contact | Shiqing Gao"
-  description="Email, GitHub, and website information for Shiqing Gao."
-  lang="en"
->
-  <header class="container page-header personal-header">
-    <p class="eyebrow">Contact</p>
-    <h1>Contact information.</h1>
-    <p>
-      For academic or project-related messages, email is usually the best route.
-      GitHub is the best place to find public code and project notes.
-    </p>
-  </header>
-
-  <section class="container contact-section section">
-    <div class="contact-label">Contact</div>
-    <div class="contact-list">
-      <article>
-        <span>Email</span>
-        <ObfuscatedEmail
-          label={profile.emailLabel}
-          parts={profile.emailParts}
-        />
-      </article>
-      <article>
-        <span>GitHub</span>
-        <a class="contact-link" href={profile.github}>github.com/gaoshiqingcuhk</a>
-      </article>
-      <article>
-        <span>Website</span>
-        <a class="contact-link" href={profile.website}>www.gaoshiqing.space</a>
-      </article>
-      <p>I usually respond fastest through email.</p>
-    </div>
-  </section>
+<BaseLayout title="Contact | Shiqing Gao" description="Email, GitHub, and website information for Shiqing Gao.">
+  <div class="container reading-page narrow-page">
+    <header class="page-header">
+      <h1>Contact</h1>
+      <p>For academic or project-related messages, email is usually the best way to reach me.</p>
+    </header>
+    <dl class="contact-list">
+      <div>
+        <dt>Email</dt>
+        <dd><ObfuscatedEmail label={profile.emailLabel} parts={profile.emailParts} /></dd>
+      </div>
+      <div>
+        <dt>GitHub</dt>
+        <dd><a href={profile.github}>github.com/gaoshiqingcuhk</a></dd>
+      </div>
+      <div>
+        <dt>Website</dt>
+        <dd><a href={profile.website}>www.gaoshiqing.space</a></dd>
+      </div>
+    </dl>
+  </div>
 </BaseLayout>

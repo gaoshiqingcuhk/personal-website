@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, site.domain);
+const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -42,9 +43,10 @@ const canonicalUrl = new URL(Astro.url.pathname, site.domain);
     <title>{title}</title>
   </head>
   <body>
-    <div class="site-shell">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class:list={["site-shell", isHome && "site-shell-home"]}>
       <Header />
-      <main class="main-content">
+      <main class="main-content" id="main" tabindex="-1">
         <slot />
       </main>
       <Footer />
