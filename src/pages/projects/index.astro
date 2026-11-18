@@ -2,18 +2,19 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectEntry from "../../components/ProjectEntry.astro";
-import { profile } from "../../data/profile";
-import { sortProjectsByDate } from "../../utils/projects";
 
-const selectedProjectSlugs = new Set([
+const selectedProjectSlugs = [
+  "formalization-of-mathematics-in-lean-4",
+  "ai-assisted-error-detection-in-mathematical-proofs",
   "image-inverse-problems-denoising",
   "subdiffusion-mode-decay",
   "machine-learning-uncertainty-quantification",
   "mathematical-modeling-optimization"
-]);
+];
 
-const projects = sortProjectsByDate(await getCollection("projects")).filter((project) =>
-  selectedProjectSlugs.has(project.slug)
+const allProjects = await getCollection("projects");
+const projects = selectedProjectSlugs.flatMap((slug) =>
+  allProjects.filter((project) => project.slug === slug)
 );
 ---
 
@@ -26,19 +27,17 @@ const projects = sortProjectsByDate(await getCollection("projects")).filter((pro
       <h1>Projects</h1>
       <p>Ongoing research and selected computational projects.</p>
     </header>
+    <p class="project-workflow">
+      For the four computational projects, much of the code was produced with AI
+      assistance. My work focused on directing experiments, examining outputs,
+      checking results, and interpreting the findings.
+    </p>
     <ol class="editorial-list project-index">
-      {profile.research.map((item, index) => (
-        <li>
-          <article class="indexed-entry project-entry">
-            <span class="folio" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <h2 class="project-entry-title">{item.title}</h2>
-              <p class="entry-summary">{item.context}</p>
-            </div>
-          </article>
-        </li>
-      ))}
-      {projects.map((project, index) => <li><ProjectEntry project={project} index={index + profile.research.length} /></li>)}
+      {projects.map((project, index) => <li><ProjectEntry project={project} index={index} /></li>)}
     </ol>
   </div>
 </BaseLayout>
+
+<style>
+  .project-workflow { max-width: 67ch; margin-bottom: 1.25rem; color: var(--muted); }
+</style>

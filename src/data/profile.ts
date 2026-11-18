@@ -31,15 +31,5 @@ export const profile = {
     "AI-assisted Mathematical Reasoning",
     "Formal Verification"
   ],
-  research: [
-    {
-      title: "Formalization of Mathematics in Lean 4",
-      context: "Ongoing research supervised by Prof. Mykola Matviichuk"
-    },
-    {
-      title: "AI-Assisted Error Detection in Mathematical Proofs",
-      context: "Ongoing independent research"
-    }
-  ],
   broaderInterests: ["Writing", "Language", "Design", "Music"]
 } as const;

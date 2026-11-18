@@ -5,53 +5,80 @@ status: "Completed computational project"
 category: "Academic / Technical"
 tags: ["Computational Inverse Problems", "Computational Imaging", "Scientific Computing"]
 summary: "A reproducible computational study of image denoising and deblurring as inverse problems under controlled synthetic degradations."
-role: "Independent undergraduate project"
-tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image"]
+role: "Experiment direction, output checks, and interpretation"
+tools: ["Python", "NumPy", "pandas", "matplotlib", "scikit-image", "PyTorch"]
 repoUrl: "https://github.com/gaoshiqingcuhk/image-inverse-problems"
 featured: true
 ---
 
-## Overview
+## Recovering an Image from a Degraded Observation
 
-This project studies image denoising and deblurring as representative image inverse problems. I used controlled synthetic degradations to compare reconstruction behavior across classical filtering, variational regularization, non-local patch-based methods, frequency-domain deconvolution, iterative deconvolution, and a lightweight CNN denoising baseline.
+Denoising asks how much structure can be recovered when random noise is added
+to an image. Deblurring adds another difficulty: a blur operator suppresses fine
+detail before noise is introduced. Trying to reverse that operator can amplify
+noise rather than recover the original. I used this project to examine how
+regularization and image priors change that trade-off.
 
-The project is framed as a reproducible undergraduate computational study rather than a new reconstruction method or a state-of-the-art claim.
+The experiments use standard grayscale images from scikit-image with synthetic
+Gaussian noise and blur. They progress from a single-image baseline to parameter
+sweeps, four-image comparisons, and degradation-strength tests. Fixed seeds and
+saved settings make individual comparisons reproducible. The robustness studies
+retain fixed method parameters rather than retuning each method for every case.
 
-## What I Studied / Implemented
+## Classical Priors and a Learned Baseline
 
-- Denoising and deblurring as inverse problems
-- Gaussian filtering as a simple denoising baseline
-- Tikhonov regularization and total variation Chambolle denoising
-- Non-local means as a patch-based image-prior method
-- Wiener and Richardson-Lucy deconvolution for deblurring
-- A small CPU-friendly CNN denoising baseline for comparison
-- PSNR, SSIM, runtime, visual comparisons, and error maps
-- Noise-level, blur-strength, parameter-sensitivity, and robustness checks
+Gaussian filtering provides a local smoothing reference. Tikhonov regularization
+penalizes squared image gradients, while total variation favors edge-preserving,
+piecewise-smooth reconstructions. Non-local means uses patch similarity rather
+than only spatial proximity. For deblurring, the comparisons include Tikhonov,
+Wiener deconvolution, and iterative Richardson-Lucy updates.
 
-## Methods or Workflow
+A separate, lightweight CNN experiment uses training patches from `coins`,
+`moon`, and `page`, with `camera` as the test image. This is a learned denoiser,
+not a learned deblurring model. Its one-time training cost is distinguished from
+inference runtime.
 
-The workflow starts by applying controlled noise or blur to sample grayscale images, then reconstructs the image with several methods. Each experiment records reconstruction settings, visual outputs, quantitative metrics, runtime information, and metadata so that the comparison is easier to inspect later.
+<figure>
+  <a href="/images/projects/image-inverse-problems/denoising-comparison.webp"><img src="/images/projects/image-inverse-problems/denoising-comparison.webp" width="2200" height="1400" loading="lazy" alt="Camera image before and after Gaussian noise, Gaussian filtering, two Tikhonov settings, and total variation denoising; TV preserves structure better than the smoother outputs in this comparison." /></a>
+  <figcaption>Single-image denoising at noise standard deviation 0.10. This earlier comparison excludes non-local means and the CNN. Original output: <a href="https://github.com/gaoshiqingcuhk/image-inverse-problems/blob/452899c936dd27254d4a81560a9a41523545acf6/figures/07_consolidated_visual_comparison.png">07_consolidated_visual_comparison.png</a>.</figcaption>
+</figure>
 
-The repository is organized as a sequence of numbered scripts, from early denoising baselines through deblurring experiments, robustness analysis, and the lightweight CNN baseline. Classical regularization and image-prior methods are treated as strong reference baselines. The learning-based baseline is exploratory and is included mainly to compare behavior, not to claim a superior model.
+## What the Comparisons Show
 
-## Outputs
+PSNR, SSIM, runtime, visual comparisons, and error maps describe different aspects
+of restoration. In the four-image NLM comparison, NLM with `h = 0.10` had the
+highest average PSNR and marginally highest average SSIM; TV remained competitive
+and performed best on `moon`. Rankings changed with noise strength.
 
-- Reproducible experiment scripts and saved configuration/metadata
-- CSV outputs for metrics, runtime, sensitivity studies, and method comparisons
-- Figures for visual comparisons, error maps, parameter sensitivity, and robustness checks
-- A small CNN checkpoint and training-history outputs
-- README, project summary, report notes, and figure/result indexes
+In the saved CNN comparison on `camera`, PSNR rose from 20.42 dB for the noisy
+input to 26.48 dB for the CNN, below TV at 28.30 dB and NLM at 28.71 dB. That
+comparison does not show that learned restoration is generally inferior; it
+shows the limits of this small training setup.
 
-## What I Learned
+<figure>
+  <a href="/images/projects/image-inverse-problems/cnn-psnr.png"><img src="/images/projects/image-inverse-problems/cnn-psnr.png" width="1440" height="840" loading="lazy" alt="PSNR bar chart on camera: noisy input 20.42 dB, Gaussian filtering 27.17, TV 28.30, non-local means 28.71, and tiny CNN 26.48." /></a>
+  <figcaption>PSNR from the final single-image CNN comparison. Source: <a href="https://github.com/gaoshiqingcuhk/image-inverse-problems/blob/452899c936dd27254d4a81560a9a41523545acf6/results/16_tiny_cnn_denoising_results.csv">saved experiment table</a>.</figcaption>
+</figure>
 
-Classical methods remain strong, interpretable baselines in small controlled inverse-problem experiments. In the completed runs, TV denoising and non-local means were often competitive for denoising, while Tikhonov-style deblurring was a stable baseline in the synthetic Gaussian-blur setting. The lightweight CNN improved over noisy inputs but did not outperform stronger classical baselines in this small CPU-friendly setup.
+Tikhonov was the most stable deblurring baseline in the tested Gaussian-blur
+grid. Very weak regularization amplified artifacts; moderate regularization
+improved recovery. PSNR and SSIM preferred different regularization strengths.
+Wiener was competitive, while Richardson-Lucy was sensitive to iteration count
+and did not exceed the selected Tikhonov or Wiener baselines.
 
-The project made the trade-off between noise removal, edge preservation, runtime, and parameter choice visible both in metrics and in reconstructed images.
+<figure>
+  <a href="/images/projects/image-inverse-problems/deblurring-grid.webp"><img src="/images/projects/image-inverse-problems/deblurring-grid.webp" width="3000" height="1200" loading="lazy" alt="Tikhonov deblurring grid: very small lambda produces visible noise and ringing, while moderate lambda stabilizes recovery; the displayed PSNR maximum is at 0.01 and SSIM maximum at 0.05." /></a>
+  <figcaption>Gaussian blur with sigma 2.0 and noise sigma 0.01. The tested PSNR maximum occurs at lambda 0.01, while SSIM prefers 0.05. Original output: <a href="https://github.com/gaoshiqingcuhk/image-inverse-problems/blob/452899c936dd27254d4a81560a9a41523545acf6/figures/08_tikhonov_deblurring_visual_grid.png">08_tikhonov_deblurring_visual_grid.png</a>.</figcaption>
+</figure>
 
-## Repository
+## Interpretation and Scope
 
-[View the GitHub repository](https://github.com/gaoshiqingcuhk/image-inverse-problems)
+Directing these comparisons and checking their outputs helped me connect
+regularization strength with visible failure modes. No single metric or image
+settled the comparison. The study does not establish performance on real
+photographs with unknown blur, motion blur, or non-Gaussian noise. It uses a small
+image set, periodic-boundary FFT models where applicable, and limited CNN
+training data; runtime is also implementation- and machine-dependent.
 
-## Limitations
-
-The experiments use controlled synthetic Gaussian noise and blur on small grayscale images, so the conclusions should not be read as general claims about real-world image restoration. The project does not cover real-world datasets, blind restoration, motion blur, or alternative boundary models. The CNN baseline is intentionally small and limited by the available training setup.
+[Repository](https://github.com/gaoshiqingcuhk/image-inverse-problems) ·
+[Detailed experimental report](https://github.com/gaoshiqingcuhk/image-inverse-problems/blob/452899c936dd27254d4a81560a9a41523545acf6/report/mini_report.md)

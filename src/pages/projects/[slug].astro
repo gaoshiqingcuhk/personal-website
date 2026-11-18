@@ -44,3 +44,14 @@ const links = [
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .project-prose :global(figure) { margin: 1.5rem 0; }
+  .project-prose :global(figure img) { display: block; width: 100%; height: auto; }
+  .project-prose :global(figcaption) { margin-top: .5rem; font-size: .9rem; color: var(--muted); }
+  .project-prose :global(math[display="block"]) { max-width: 100%; overflow-x: auto; padding-block: .5rem; }
+  .project-prose :global(.project-table-wrap) { max-width: 100%; overflow-x: auto; margin-block: 1rem; }
+  .project-prose :global(table) { width: 100%; }
+  .project-prose :global(caption) { text-align: left; color: var(--muted); font-size: .9rem; padding-bottom: .5rem; }
+  .project-prose :global(th), .project-prose :global(td) { border: 0; text-align: left; vertical-align: top; }
+</style>
